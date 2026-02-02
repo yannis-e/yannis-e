@@ -4,6 +4,8 @@
 
 ### [Guestbook (click to add entry)](https://github.com/yannis-e/yannis-e/issues/1#issue-3886560162)
 <!-- Guestbook -->
+| Name | Date | Message |
+|---|---|---|
 
 <!-- /Guestbook -->
 
