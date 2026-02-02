@@ -5,6 +5,8 @@
 <img src="https://github.com/yannis-e/yannis-e/blob/main/images/notepad.gif" alt="Site created with Notepad" height="30" />
 
 <!-- Guestbook -->
+| Name | Date | Message |
+|---|---|---|
 
 <!-- /Guestbook -->
 
