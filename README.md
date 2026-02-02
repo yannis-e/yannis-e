@@ -4,9 +4,7 @@
 
 ### [Guestbook (click to add entry)](https://github.com/yannis-e/yannis-e/issues/1#issue-3886560162)
 <!-- Guestbook -->
-| Name | Date | Message |
-|---|---|---|
-| [yannis-e](https://github.com/yannis-e) | 2/2/2026, 3:33:48 PM | Does it work? |
+
 <!-- /Guestbook -->
 
   <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
