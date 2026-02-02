@@ -2,7 +2,7 @@
 
 <img src="images/welcome.png" alt="Welcome to my Github Profile" style="max-width: 100%; border: 3px solid #000080;" />
 
-### Guestbook
+### [Guestbook (click to add entry)](https://github.com/yannis-e/yannis-e/issues/1#issue-3886560162)
 <!-- Guestbook -->
 | Name | Date | Message |
 |---|---|---|
