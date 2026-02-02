@@ -1,0 +1,70 @@
+name: Update guestbook
+
+on:
+  issue_comment:
+    types: [created, edited, deleted]
+
+permissions:
+  contents: write  # Damit die Action die README aktualisieren und pushen kann
+
+jobs:
+  update_guestbook:
+    if: ${{ github.event.issue.title == 'Guestbook' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Update guestbook from comments
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const truncate = (str, len) => str.length > len ? str.slice(0, len) + "..." : str;
+
+            const query = `
+              query($owner:String!, $name:String!, $num:Int!) {
+                repository(owner:$owner, name:$name) {
+                  issue(number:$num) {
+                    comments(first: 10, orderBy:{field:UPDATED_AT, direction:DESC}) {
+                      nodes {
+                        author { login url avatarUrl }
+                        bodyText
+                        updatedAt
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+            const vars = {
+              owner: context.repo.owner,
+              name: context.repo.repo,
+              num: context.issue.number
+            };
+
+            const result = await github.graphql(query, vars);
+            const buildTable = (comments) => {
+              let md = "| Name | Date | Message |\n|---|---|---|\n";
+              for (const c of comments) {
+                const text = truncate(c.bodyText.replace(/\n/g, " "), 120);
+                md += `| [${c.author.login}](${c.author.url}) | ${new Date(c.updatedAt).toLocaleString()} | ${text} |\n`;
+              }
+              return md;
+            };
+
+            const fs = require('fs');
+            const readme = fs.readFileSync('README.md', 'utf8');
+            const updated = readme.replace(
+              /(?<=<!-- Guestbook -->\n)[\s\S]*?(?=\n<!-- \/Guestbook -->)/,
+              buildTable(result.repository.issue.comments.nodes)
+            );
+            fs.writeFileSync('README.md', updated, 'utf8');
+
+      - name: Commit & push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "✨ Update guestbook"
+          git push
