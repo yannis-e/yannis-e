@@ -6,6 +6,8 @@
 <!-- Guestbook -->
 | Name | Date | Message |
 |---|---|---|
+| [G1cked](https://github.com/G1cked) | 4/22/2026, 8:20:52 AM | ☀️ |
+| [xxspell](https://github.com/xxspell) | 2/25/2026, 4:04:27 PM | 🫩 |
 
 <!-- /Guestbook -->
 
